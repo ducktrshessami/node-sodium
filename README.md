@@ -6,7 +6,7 @@ Version 3.0 has been refactored to use N-API, instead of NaN, so it should be mo
 
 Versions 2.0 and above are no longer compatible with Node 0.x. If you're still using an old version of node please use an older version of node-sodium.
 
-Uses Libsodium 1.0.16
+Uses Libsodium 1.0.18
 
 
 Port of the [lib sodium](https://github.com/jedisct1/libsodium) Encryption Library to Node.js.
@@ -113,13 +113,13 @@ You MUST set the `msvs_version` `npm config` variable to the appropriate Microso
 
 Example set `msvs_version` for your user only:
 
-    npm config set msvs_version 2015
+    npm config set msvs_version 2019
 
 Example set `msvs_version` for all users:
 
-    npm config set msvs_version 2015 --global
+    npm config set msvs_version 2019 --global
 
-At the moment only 2010, 2012, 2013 and 2015 versions are supported.
+At the moment only 2017, 2019, and 2022 versions are supported.
 
 Now run
 
