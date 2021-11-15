@@ -155,13 +155,9 @@ function download(url, dest, cb) {
 
 function getPlatformToolsVersion() {
     var platformTools = {
-        2010: 'v100',
-        2012: 'v110',
-        2013: 'v120',
-        2015: 'v140',
         2017: 'v141',
-        2019: 'v141', // v142
-        2022: 'v141'  // v143
+        2019: 'v142',
+        2022: 'v143'
     }
 
     checkMSVSVersion();
@@ -304,24 +300,24 @@ function run(cmdLine, expectedExitCode, next) {
 
 function errorSetMSVSVersion() {
     console.log('Please set your Microsoft Visual Studio version before you run npm install');
-    console.log('Example for Visual Studio 2015:\n');
+    console.log('Example for Visual Studio 2019:\n');
     console.log('    For you user only:\n');
-    console.log('        npm config set msvs_version 2015\n');
+    console.log('        npm config set msvs_version 2019\n');
     console.log('    Global:\n');
-    console.log('        npm config set msvs_version 2015 --global\n');
-    console.log('Supported values are 2010, 2012, 2013, 2015, 2017, 2019, 2022\n');
+    console.log('        npm config set msvs_version 2019 --global\n');
+    console.log('Supported values are 2017, 2019, 2022\n');
     process.exit(1);
 }
 
 function errorInvalidMSVSVersion() {
     console.log('Invalid msvs_version ' + process.env.npm_config_msvs_version + '\n');
     console.log('Please set your Microsoft Visual Studio version before you run npm install');
-    console.log('Example for Visual Studio 2015:\n');
+    console.log('Example for Visual Studio 2019:\n');
     console.log('    For you user only:\n');
-    console.log('        npm config set msvs_version 2015\n');
+    console.log('        npm config set msvs_version 2019\n');
     console.log('    Global:\n');
-    console.log('        npm config set msvs_version 2015 --global\n');
-    console.log('Supported values are 2010, 2012, 2013, 2015, 2017, 2019, 2022\n');
+    console.log('        npm config set msvs_version 2019 --global\n');
+    console.log('Supported values are 2017, 2019, 2022\n');
     process.exit(1);
 }
 
@@ -330,7 +326,7 @@ function checkMSVSVersion() {
         errorSetMSVSVersion();
     }
     console.log('MS Version: ' + process.env.npm_config_msvs_version);
-    if (process.env.npm_config_msvs_version.search(/^2010|2012|2013|2015|2017|2019|2022$/)) {
+    if (process.env.npm_config_msvs_version.search(/^2017|2019|2022$/)) {
         errorInvalidMSVSVersion();
     }
 }
