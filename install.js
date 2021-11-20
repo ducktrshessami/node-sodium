@@ -160,8 +160,7 @@ function getPlatformToolsVersion() {
         2022: 'v143'
     }
 
-    checkMSVSVersion();
-    var ver = platformTools[process.env.npm_config_msvs_version];
+    var ver = platformTools[resolveMSVSVersion()];
     if (!ver) {
         throw new Error('Please set msvs_version');
     }
@@ -306,6 +305,7 @@ function errorSetMSVSVersion() {
     console.log('    Global:\n');
     console.log('        npm config set msvs_version 2019 --global\n');
     console.log('Supported values are 2017, 2019, 2022\n');
+    console.log('Later versions will resolve to the latest supported version');
     process.exit(1);
 }
 
@@ -318,17 +318,20 @@ function errorInvalidMSVSVersion() {
     console.log('    Global:\n');
     console.log('        npm config set msvs_version 2019 --global\n');
     console.log('Supported values are 2017, 2019, 2022\n');
+    console.log('Later versions will resolve to the latest supported version');
     process.exit(1);
 }
 
-function checkMSVSVersion() {
+function resolveMSVSVersion() {
     if (!process.env.npm_config_msvs_version) {
         errorSetMSVSVersion();
     }
     console.log('MS Version: ' + process.env.npm_config_msvs_version);
-    if (process.env.npm_config_msvs_version.search(/^2017|2019|2022$/)) {
+    var parsed = Math.min(parseInt(process.env.npm_config_msvs_version), 2022).toString();
+    if (parsed.search(/^2017|2019|2022$/)) {
         errorInvalidMSVSVersion();
     }
+    return parsed;
 }
 
 function isPreInstallMode() {
@@ -351,7 +354,7 @@ if (os.platform() !== 'win32') {
         run('make nodesodium');
     }
 } else {
-    checkMSVSVersion();
+    resolveMSVSVersion();
     if (isPreInstallMode()) {
         console.log('Preinstall Mode');
         createFullPath("deps/build/include/sodium");
