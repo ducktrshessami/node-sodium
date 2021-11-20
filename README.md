@@ -119,7 +119,7 @@ Example set `msvs_version` for all users:
 
     npm config set msvs_version 2019 --global
 
-At the moment only 2017, 2019, and 2022 versions are supported.
+At the moment only 2017, 2019, and 2022 versions are supported. However, later versions will resolve to the latest supported version due to [binary compatibility](https://docs.microsoft.com/en-us/cpp/porting/binary-compat-2015-2017)
 
 Now run
 
