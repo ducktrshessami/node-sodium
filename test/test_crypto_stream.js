@@ -4,7 +4,6 @@
 "use strict";
 
 var assert = require('assert');
-var semver = require('semver');
 var crypto = require('crypto');
 var sodium = require('../build/Release/sodium');
 
@@ -121,26 +120,6 @@ describe("crypto_stream verify parameters", function () {
          assert.throws(function() {
             var r = sodium.crypto_stream(len, nonce, key);
         });
-        done();
-    });
-
-    /*
-    Node.js >=14 increased the buffer length limit
-    and automatically truncates/floors numbers when
-    setting a buffer length
-    */
-    it('bad param 1 number (Node <14)', function(done) {
-        var callback = function() {
-            var r = sodium.crypto_stream(len, nonce, key);
-        };
-        len = -123;
-        if( semver.lt(process.version, "14.0.0") ) {
-            assert.throws(callback);
-        }
-        else {
-            this.timeout(30000); // Buffer length will be long
-            callback();
-        }
         done();
     });
 
